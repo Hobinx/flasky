@@ -50,6 +50,7 @@ class User(UserMixin, db.Model):
             return False
         self.confirmed = True
         db.session.add(self)
+        return True
 
     def __repr__(self):
         return f'<User {self.username!r}>'

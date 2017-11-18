@@ -1,0 +1,2 @@
+-r common.tx
+faker==0.8.7

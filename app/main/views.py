@@ -123,6 +123,7 @@ def follow(username):
     flash('You are now following {}.'.format(username))
     return redirect(url_for('.user', username=username))
 
+
 @main.route('/followers/<username>')
 def followers(username):
     user = User.query.filter_by(username=username).first()

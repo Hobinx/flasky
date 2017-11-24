@@ -99,7 +99,7 @@ class Follow(db.Model):
                             primary_key=True)
     followed_id = db.Column(db.Integer, db.ForeignKey('users.id'),
                             primary_key=True)
-    timestamp = db.Column(db.Datetime, default=datetime.utcnow)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
 
 class User(UserMixin, db.Model):
@@ -203,7 +203,7 @@ class User(UserMixin, db.Model):
         new_email = data.get('new_email')
         if new_email is None:
             return False
-        if self.query.filter(email=new_email).first() is not None:
+        if self.query.filter_by(email=new_email).first() is not None:
             return False
         self.email = new_email
         self.avatar_hash = self.gravatar_hash()

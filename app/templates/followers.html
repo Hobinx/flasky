@@ -24,12 +24,14 @@ Flasky - {{ title }} {{ user.username }}
           <img src="{{ follow.user.gravatar(size=32) }}" alt="gravatar" class="img-rounded">
         </a>
       </td>
-      <td>{{ moment(follow.timestap).format('L') }}</td>
+      <td>{{ moment(follow.timestamp).format('L') }}</td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
+{% if pagination %}
 <div class="pagination">
   {{ macros.pagination_widget(pagination, endpiont, username = user.username )}}
 </div>
+{% endif %}
 {% endblock page_content %}

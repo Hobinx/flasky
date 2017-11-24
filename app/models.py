@@ -234,6 +234,21 @@ class User(UserMixin, db.Model):
             url=url, hash=hash, size=size, default=default, rating=rating
         )
 
+    def follow(self, user):
+        if not self.is_following(user):
+            f = Follow(follower=self, followed=user)
+            db.session.add(f)
+
+    def unfollow(self, user):
+        f = self.followed.filter_by(followed_id=user.id).first()
+        if f:
+            db.session.delete(f)
+
+    def is_following(self, user):
+        if user.id is None:
+            return False
+        return self.followed.filter_by(followed_id=user.id).first() is not None
+
 
 class AnonymousUser(AnonymousUserMixin):
     def can(self, permissions):
